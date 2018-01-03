@@ -9,18 +9,15 @@ app.controller('indexCtrl', function($scope, $http) {
         $scope.lastpayout = res.data.lastpayout * 1000;
         $scope.nextpayout = moment ($scope.lastpayout).add (1, 'week').valueOf();
         $scope.accounts = [];
-        $scope.total = { paid: 0.0, pending: 0.0 };
 
         for (addr in res.data.accounts) {
             var it = res.data.accounts[addr];
             it['address'] = addr;
             $scope.accounts.push (it);
-            $scope.total.paid += res.data.accounts[addr].received;
-            $scope.total.pending += res.data.accounts[addr].pending;
         }
     });
 
-    $http.get ('https://wallet.lisknode.io/api/delegates/get?username=dakk').then (function (res) {
+    $http.get ('https://wallet.testnet.shiftnrg.org/api/delegates/get?username=karamarko').then (function (res) {
         $scope.delegate = res.data.delegate;
     });
 });
